@@ -1,0 +1,47 @@
+{
+  "name": "@bluemarblepayroll/logicality",
+  "version": "1.0.0",
+  "description": "String-based boolean expression evaluator",
+  "main": "./dist/logic.js",
+  "typings": "./dist/logic.d.ts",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=8.11.3"
+  },
+  "contributors": [
+    "Matthew Ruggio <mruggio@bluemarblepayroll.com>"
+  ],
+  "keywords": [
+    "lui",
+    "lui_logic",
+    "boolean",
+    "parse",
+    "evaluator",
+    "logic",
+    "interpreter",
+    "lexer",
+    "ast"
+  ],
+  "scripts": {
+    "test": "mocha --reporter spec",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bluemarblepayroll/logicality"
+  },
+  "bugs": {
+    "url": "https://github.com/bluemarblepayroll/logicality/issues"
+  },
+  "author": "Blue Marble Payroll, LLC",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/bluemarble-ondemand/logicality/src/master/",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "typescript": "^2.9.2"
+  }
+}
