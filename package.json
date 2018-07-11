@@ -1,6 +1,6 @@
 {
   "name": "@bluemarblepayroll/logicality",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "String-based boolean expression evaluator",
   "main": "./dist/logic.js",
   "typings": "./dist/logic.d.ts",
@@ -15,8 +15,7 @@
     "Matthew Ruggio <mruggio@bluemarblepayroll.com>"
   ],
   "keywords": [
-    "lui",
-    "lui_logic",
+    "logicality",
     "boolean",
     "parse",
     "evaluator",

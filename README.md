@@ -1,9 +1,9 @@
-# Lui Logic
+# Logicality
 
-[![Build Status](https://travis-ci.org/bluemarblepayroll/lui_logic.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/lui_logic)
+[![Build Status](https://travis-ci.org/bluemarblepayroll/logicality.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/logicality)
 
 A common problem that many frameworks have is the ability to give developers an expressive
-intermediary scripting language or DSL. Lui Logic helps solve this problem by providing a simple
+intermediary scripting language or DSL. Logicality helps solve this problem by providing a simple
 boolean expression evaluator.  That way, your developers can create simple scripts for dynamically
 resolving boolean values such as:
 
@@ -28,13 +28,13 @@ This library could be consumed as either a pure TypeScript library or as its tra
 To install through NPM:
 
 ````
-npm install --save lui_logic
+npm install --save @bluemarblepayroll/logicality
 ````
 
 To install through Yarn:
 
 ````
-yarn add --save lui_logic
+yarn add --save @bluemarblepayroll/logicality
 ````
 
 ## Examples
@@ -51,17 +51,17 @@ Now you can bind and evaluate this expression against passed in objects:
 
 ````
 let record = { visible: false, admin: true };
-let visible =  LuiLogic.evaluate('visible || admin', record); // resolves to true.
+let visible =  Logic.evaluate('visible || admin', record); // resolves to true.
 ````
 
 ### Plugging in Immutable.JS
 
-The above example works just fine using Lui Logic's default object value resolver, but you can also pass in a custom function that will serve as resolver.  That way you could use dot notation for value resolution.  For example:
+The above example works just fine using Logic's default object value resolver, but you can also pass in a custom function that will serve as resolver.  That way you could use dot notation for value resolution.  For example:
 
 ````
 let resolver = (value, input) => input && value && !!input.get(value.toString().split('.'));
 let record = Immutable.fromJS({ visible: false, settings: { admin: true } });
-let visible =  LuiLogic.evaluate('visible || settings.admin', record, resolver); // resolves to true.
+let visible =  Logic.evaluate('visible || settings.admin', record, resolver); // resolves to true.
 ````
 
 ## Contributing
@@ -72,8 +72,8 @@ Basic steps to take to get this repository compiling:
 
 1. Install [Node.js](https://nodejs.org) (check package.json for versions supported.)
 2. Install Yarn package manager (npm install -g yarn)
-3. Clone the repository (git clone git@github.com:bluemarblepayroll/lui_logic.git)
-4. Navigate to the root folder (cd lui_logic)
+3. Clone the repository (git clone git@github.com:bluemarblepayroll/logicality.git)
+4. Navigate to the root folder (cd logicality)
 5. Install dependencies (yarn)
 
 ### Compiling
