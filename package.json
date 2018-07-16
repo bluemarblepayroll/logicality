@@ -1,6 +1,6 @@
 {
   "name": "@bluemarblepayroll/logicality",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "String-based boolean expression evaluator",
   "main": "./dist/logic.js",
   "typings": "./dist/logic.d.ts",

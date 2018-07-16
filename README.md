@@ -34,7 +34,7 @@ npm install --save @bluemarblepayroll/logicality
 To install through Yarn:
 
 ````
-yarn add --save @bluemarblepayroll/logicality
+yarn add @bluemarblepayroll/logicality
 ````
 
 ## Examples
