@@ -3,6 +3,7 @@ export declare class AstNode {
     readonly token: Token;
     readonly name: string;
     constructor(token: any);
+    toString(): string;
 }
 export declare class BinaryOperatorNode extends AstNode {
     readonly left: AstNode;

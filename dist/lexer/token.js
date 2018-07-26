@@ -14,6 +14,9 @@ var Token = (function () {
         this.type = type;
         this.value = value;
     }
+    Token.prototype.toString = function () {
+        return this.type + "::" + this.value;
+    };
     return Token;
 }());
 exports.Token = Token;

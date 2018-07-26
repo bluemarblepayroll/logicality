@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
- 
+
 import { Lexer } from "../lexer/lexer";
 import { Token, TokenType } from "../lexer/token";
 import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from './ast';
@@ -54,7 +54,7 @@ export class Parser {
       return node;
     } else if (token.type === TokenType.NotOp) {
       this.eat(TokenType.NotOp);
-      let node:AstNode = this.expr();
+      let node:AstNode = this.factor();
       return new UnaryOperatorNode(node, token);
     } else {
       throw `Factor cannot determine what to do with: ${token}`;

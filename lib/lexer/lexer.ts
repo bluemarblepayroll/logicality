@@ -7,6 +7,7 @@
 
 import { Token, TokenType } from "./token";
 import { Grammar, simpleGrammar } from "./grammar";
+import { Logger } from '../util/logger';
 
 export interface Lexer {
   expression:string;
@@ -37,7 +38,10 @@ export class SimpleLexer implements Lexer {
 
     this.matches = this.getMatches();
     this.currentIndex = -1;
+
+    Logger.log(`[SimpleLexer::constructor] ${this.expression} -> ${this.matches.join(', ')}`)
   }
+
 
   getNextToken():Token {
     this.currentIndex++;
@@ -46,7 +50,11 @@ export class SimpleLexer implements Lexer {
       return null;
     }
 
-    return this.matches[this.currentIndex];
+    let token = this.matches[this.currentIndex];
+
+    Logger.log(`getNextToken: ${token}`);
+
+    return token;
   }
 
   reset():void {

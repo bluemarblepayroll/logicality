@@ -38,7 +38,7 @@ var Parser = (function () {
         }
         else if (token.type === token_1.TokenType.NotOp) {
             this.eat(token_1.TokenType.NotOp);
-            var node = this.expr();
+            var node = this.factor();
             return new ast_1.UnaryOperatorNode(node, token);
         }
         else {

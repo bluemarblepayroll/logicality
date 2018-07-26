@@ -11,6 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 var token_1 = require("../lexer/token");
+var logger_1 = require("../util/logger");
 var NodeVisitor = (function () {
     function NodeVisitor() {
     }
@@ -19,6 +20,7 @@ var NodeVisitor = (function () {
             return null;
         }
         var visitorName = this.getMethodName(node);
+        logger_1.Logger.log("Visiting: " + node + " with method: " + visitorName);
         if (this[visitorName]) {
             return this[visitorName](node);
         }
@@ -77,7 +79,9 @@ var Interpreter = (function (_super) {
     };
     Interpreter.prototype.resolveValue = function (value) {
         if (this.resolver) {
-            return !!this.resolver(value);
+            var resolvedValue = !!this.resolver(value);
+            logger_1.Logger.log("Resolved: " + value + " to: " + resolvedValue);
+            return resolvedValue;
         }
         else {
             throw "No resolver function but trying to resolve: " + value;

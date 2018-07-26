@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var token_1 = require("./token");
 var grammar_1 = require("./grammar");
+var logger_1 = require("../util/logger");
 var SimpleLexer = (function () {
     function SimpleLexer(expression) {
         if (!expression) {
@@ -15,13 +16,16 @@ var SimpleLexer = (function () {
         }
         this.matches = this.getMatches();
         this.currentIndex = -1;
+        logger_1.Logger.log("[SimpleLexer::constructor] " + this.expression + " -> " + this.matches.join(', '));
     }
     SimpleLexer.prototype.getNextToken = function () {
         this.currentIndex++;
         if (this.currentIndex > this.matches.length - 1) {
             return null;
         }
-        return this.matches[this.currentIndex];
+        var token = this.matches[this.currentIndex];
+        logger_1.Logger.log("getNextToken: " + token);
+        return token;
     };
     SimpleLexer.prototype.reset = function () {
         this.currentIndex = -1;

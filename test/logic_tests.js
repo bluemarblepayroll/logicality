@@ -9,6 +9,10 @@
 
 var expect = require('chai').expect;
 var Logic = require('../dist/logic.js').Logic;
+var Logger = require('../dist/util/logger.js').Logger;
+
+//Uncomment this line if you want to output log data.
+//Logger.on();
 
 describe('Logic#evaluation', () => {
 
@@ -22,7 +26,7 @@ describe('Logic#evaluation', () => {
 
     tests.forEach(x => {
       let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2]);
+      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
     });
   });
 
@@ -38,7 +42,7 @@ describe('Logic#evaluation', () => {
 
     tests.forEach(x => {
       let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2]);
+      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
     });
   });
 
@@ -53,7 +57,22 @@ describe('Logic#evaluation', () => {
 
     tests.forEach(x => {
       let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2]);
+      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
+    });
+  });
+
+  it('should evaluate not expressions', () => {
+    let tests = [
+      [ '!a',         { a: false },            true ],
+      [ '!a && !b',   { a: false, b: false },  true ],
+      [ '!a && b',    { a: false, b: false },  false ],
+      [ 'a && !b',    { a: false, b: false },  false ],
+      [ '!(a && b)',  { a: false, b: false },  true ]
+    ];
+
+    tests.forEach(x => {
+      let result = Logic.evaluate(x[0], x[1]);
+      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
     });
   });
 

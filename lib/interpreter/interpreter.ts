@@ -8,6 +8,7 @@
 import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from '../parser/ast';
 import { Parser } from "../parser/parser";
 import { TokenType } from "../lexer/token";
+import { Logger } from '../util/logger';
 
 export class NodeVisitor {
 
@@ -17,6 +18,8 @@ export class NodeVisitor {
     }
 
     let visitorName:string = this.getMethodName(node);
+
+    Logger.log(`Visiting: ${node} with method: ${visitorName}`);
 
     if (this[visitorName]) {
       return this[visitorName](node);
@@ -77,7 +80,11 @@ export class Interpreter extends NodeVisitor {
 
   private resolveValue(value:string) {
     if (this.resolver) {
-      return !!this.resolver(value);
+      let resolvedValue = !!this.resolver(value);
+
+      Logger.log(`Resolved: ${value} to: ${resolvedValue}`);
+
+      return resolvedValue;
     } else {
       throw `No resolver function but trying to resolve: ${value}`;
     }

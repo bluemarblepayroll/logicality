@@ -15,6 +15,9 @@ var AstNode = (function () {
         this.token = token;
         this.name = '';
     }
+    AstNode.prototype.toString = function () {
+        return "AstNode: " + this.token + "::" + this.name;
+    };
     return AstNode;
 }());
 exports.AstNode = AstNode;

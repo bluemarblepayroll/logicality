@@ -4,7 +4,7 @@
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  */
- 
+
 export enum TokenType {
   Value = 'VALUE',
   AndOp = 'AND_OP',
@@ -21,5 +21,9 @@ export class Token {
   constructor(type:TokenType, value:string) {
     this.type = type;
     this.value = value;
+  }
+
+  toString() {
+    return `${this.type}::${this.value}`;
   }
 }

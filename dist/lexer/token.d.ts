@@ -10,4 +10,5 @@ export declare class Token {
     readonly type: TokenType;
     readonly value: string;
     constructor(type: TokenType, value: string);
+    toString(): string;
 }
