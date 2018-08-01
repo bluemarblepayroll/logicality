@@ -1,1 +1,0 @@
-{"version":3,"file":"grammar.js","sourceRoot":"","sources":["../../lib/lexer/grammar.ts"],"names":[],"mappings":";;AAgBa,QAAA,aAAa,GAAW;IACnC,KAAK,EAAE,oBAAoB;IAC3B,KAAK,EAAE,IAAI;IACX,IAAI,EAAE,MAAM;IACZ,KAAK,EAAE,IAAI;IACX,SAAS,EAAE,IAAI;IACf,UAAU,EAAE,IAAI;CACjB,CAAA"}
