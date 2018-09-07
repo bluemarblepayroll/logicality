@@ -26,7 +26,8 @@
   ],
   "scripts": {
     "test": "mocha --reporter spec",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "tsc -w"
   },
   "repository": {
     "type": "git",

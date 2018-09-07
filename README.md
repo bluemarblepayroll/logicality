@@ -97,6 +97,12 @@ To compile the TypeScript source down to native JavaScript, run:
 npm run build
 ````
 
+You can also run the TypeScript compiler in watch mode with (start developing):
+
+```
+npm start
+```
+
 ### Running Tests
 
 To execute the test suite first compile the solution then run:
