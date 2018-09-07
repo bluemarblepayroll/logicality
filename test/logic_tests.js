@@ -7,12 +7,22 @@
 
 'use strict';
 
-var expect = require('chai').expect;
-var Logic = require('../dist/logic.js').Logic;
-var Logger = require('../dist/util/logger.js').Logger;
+const expect = require('chai').expect;
+const Logic = require('../dist/logic.js').Logic;
+const Logger = require('../dist/util/logger.js').Logger;
 
 //Uncomment this line if you want to output log data.
 //Logger.on();
+
+const testEvaluate = (tests) => {
+  tests.forEach((testData) => {
+    const [expression, bindings, expectedResult] = testData;
+
+    let result = Logic.evaluate(expression, bindings)
+    expect(result).to.equal(expectedResult,
+      `Failed on: '${expression}' with bindings of ${JSON.stringify(bindings)}`);
+  });
+};
 
 describe('Logic#evaluation', () => {
 
@@ -24,10 +34,7 @@ describe('Logic#evaluation', () => {
       [ 'true && true',   null, true  ]
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
-    });
+    testEvaluate(tests);
   });
 
   it('should evaluate using standard JavaScript truthy and falsy rules', () => {
@@ -38,15 +45,12 @@ describe('Logic#evaluation', () => {
       [ 'a', { a: true },       true ],
       [ 'a', { a: NaN },       false ],
       [ 'a', { a: 0 },         false ],
-      [ 'a', { a: 1 },         true ],
+      [ 'a', { a: 1 },         true  ],
       [ 'a', { a: '' },        false ],
-      [ 'a', { a: ' ' },       true ],
+      [ 'a', { a: ' ' },       true  ],
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]} with a binding of ${JSON.stringify(x[1])}`);
-    });
+    testEvaluate(tests);
   });
 
 
@@ -60,10 +64,7 @@ describe('Logic#evaluation', () => {
       [ 'a && b', { a: true, b: true },   true  ]
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
-    });
+    testEvaluate(tests);
   });
 
   it('should evaluate "and-or" expressions', () => {
@@ -75,10 +76,7 @@ describe('Logic#evaluation', () => {
       [ '(a || b) && c',  { a: false, b: false, c: true },  false ]
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
-    });
+    testEvaluate(tests);
   });
 
   it('should evaluate "not" expressions', () => {
@@ -90,10 +88,7 @@ describe('Logic#evaluation', () => {
       [ '!(a && b)',  { a: false, b: false },  true  ]
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
-    });
+    testEvaluate(tests);
   });
 
   it('should treat question marks as a valid part of a value token', () => {
@@ -104,10 +99,7 @@ describe('Logic#evaluation', () => {
       [ 'a && b?',  { a: true, 'b?': true },    true  ]
     ];
 
-    tests.forEach(x => {
-      let result = Logic.evaluate(x[0], x[1]);
-      expect(result).to.equal(x[2], `Failed on: ${x[0]}`);
-    });
+    testEvaluate(tests);
   });
 
 });
