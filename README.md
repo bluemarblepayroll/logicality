@@ -17,7 +17,7 @@ resolving boolean values such as:
 
 ## Credit
 
-Deep inspiration was taken from [this set of articles](https://ruslanspivak.com/lsbasi-part7/).  
+Deep inspiration was taken from [this set of articles](https://ruslanspivak.com/lsbasi-part7/).
 Here, the author gives details around the theory and practical implementation of creating a basic
 language processor and compiler.
 
@@ -53,6 +53,19 @@ Now you can bind and evaluate this expression against passed in objects:
 let record = { visible: false, admin: true };
 let visible =  Logic.evaluate('visible || admin', record); // resolves to true.
 ````
+
+### What is truthy and falsy?
+
+Logicality uses the same rules for deciding which values are true or false as JavaScript. As a reminder, JavaScript considers the following six things to be false:
+
+* false
+* undefined
+* null
+* NaN (not a number)
+* 0 (the number, not the string)
+* "" (the empty string)
+
+Everything evaluates to true.
 
 ### Plugging in Immutable.JS
 

@@ -18,10 +18,10 @@ describe('Logic#evaluation', () => {
 
   it('should evaluate boolean-only expressions', () => {
     let tests = [
-      [ 'true',           null, true ],
+      [ 'true',           null, true  ],
       [ 'false',          null, false ],
       [ 'true && false',  null, false ],
-      [ 'true && true',   null, true ]
+      [ 'true && true',   null, true  ]
     ];
 
     tests.forEach(x => {
@@ -30,14 +30,34 @@ describe('Logic#evaluation', () => {
     });
   });
 
-  it('should evaluate and expressions', () => {
+  it('should evaluate using standard JavaScript truthy and falsy rules', () => {
+    let tests = [
+      [ 'a', { a: null },      false ],
+      [ 'a', { a: undefined }, false ],
+      [ 'a', { a: false },     false ],
+      [ 'a', { a: true },       true ],
+      [ 'a', { a: NaN },       false ],
+      [ 'a', { a: 0 },         false ],
+      [ 'a', { a: 1 },         true ],
+      [ 'a', { a: '' },        false ],
+      [ 'a', { a: ' ' },       true ],
+    ];
+
+    tests.forEach(x => {
+      let result = Logic.evaluate(x[0], x[1]);
+      expect(result).to.equal(x[2], `Failed on: ${x[0]} with a binding of ${JSON.stringify(x[1])}`);
+    });
+  });
+
+
+  it('should evaluate "and" expressions', () => {
     let tests = [
       [ 'a && b', null,                   false ],
       [ 'a && b', {},                     false ],
       [ 'a && b', { a: true },            false ],
       [ 'a && b', { a: true, b: false },  false ],
       [ 'a && b', { a: false, b: false }, false ],
-      [ 'a && b', { a: true, b: true },   true ]
+      [ 'a && b', { a: true, b: true },   true  ]
     ];
 
     tests.forEach(x => {
@@ -46,10 +66,10 @@ describe('Logic#evaluation', () => {
     });
   });
 
-  it('should evaluate and-or expressions', () => {
+  it('should evaluate "and-or" expressions', () => {
     let tests = [
-      [ 'a && b || c',    { a: false, b: false, c: true },  true ],
-      [ '(a && b) || c',  { a: false, b: false, c: true },  true ],
+      [ 'a && b || c',    { a: false, b: false, c: true },  true  ],
+      [ '(a && b) || c',  { a: false, b: false, c: true },  true  ],
       [ 'a || b && c',    { a: false, b: false, c: true },  false ],
       [ 'a || (b && c)',  { a: false, b: false, c: true },  false ],
       [ '(a || b) && c',  { a: false, b: false, c: true },  false ]
@@ -61,13 +81,13 @@ describe('Logic#evaluation', () => {
     });
   });
 
-  it('should evaluate not expressions', () => {
+  it('should evaluate "not" expressions', () => {
     let tests = [
-      [ '!a',         { a: false },            true ],
-      [ '!a && !b',   { a: false, b: false },  true ],
+      [ '!a',         { a: false },            true  ],
+      [ '!a && !b',   { a: false, b: false },  true  ],
       [ '!a && b',    { a: false, b: false },  false ],
       [ 'a && !b',    { a: false, b: false },  false ],
-      [ '!(a && b)',  { a: false, b: false },  true ]
+      [ '!(a && b)',  { a: false, b: false },  true  ]
     ];
 
     tests.forEach(x => {
@@ -78,10 +98,10 @@ describe('Logic#evaluation', () => {
 
   it('should treat question marks as a valid part of a value token', () => {
     let tests = [
-      [ 'a?',       { 'a?': true },             true ],
+      [ 'a?',       { 'a?': true },             true  ],
       [ '!a?',      { 'a?': true },             false ],
-      [ 'a? && b?', { 'a?': true, 'b?': true }, true ],
-      [ 'a && b?',  { a: true, 'b?': true },    true ]
+      [ 'a? && b?', { 'a?': true, 'b?': true }, true  ],
+      [ 'a && b?',  { a: true, 'b?': true },    true  ]
     ];
 
     tests.forEach(x => {
