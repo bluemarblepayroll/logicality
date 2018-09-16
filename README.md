@@ -84,12 +84,24 @@ To compile the TypeScript source down to native JavaScript, run:
 npm run build
 ````
 
+or:
+
+````
+yarn run build
+````
+
 ### Running Tests
 
 To execute the test suite first compile the solution then run:
 
 ````
 npm run test
+````
+
+or:
+
+````
+yarn run test
 ````
 
 ## License

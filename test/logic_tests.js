@@ -14,7 +14,7 @@ var Logger = require('../dist/util/logger.js').Logger;
 //Uncomment this line if you want to output log data.
 //Logger.on();
 
-describe('Logic#evaluation', () => {
+describe('Logic#evaluate', () => {
 
   it('should evaluate boolean-only expressions', () => {
     let tests = [

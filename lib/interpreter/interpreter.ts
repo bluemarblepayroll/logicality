@@ -6,7 +6,6 @@
  */
 
 import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from '../parser/ast';
-import { Parser } from "../parser/parser";
 import { TokenType } from "../lexer/token";
 import { Logger } from '../util/logger';
 
@@ -40,8 +39,12 @@ export class NodeVisitor {
 export class Interpreter extends NodeVisitor {
   readonly resolver:Function;
 
-  constructor(resolver?:Function) {
+  constructor(resolver:Function) {
     super();
+
+    if (!resolver) {
+      throw 'Resolver is required'
+    }
 
     this.resolver = resolver;
   }
@@ -79,14 +82,10 @@ export class Interpreter extends NodeVisitor {
   }
 
   private resolveValue(value:string) {
-    if (this.resolver) {
-      let resolvedValue = !!this.resolver(value);
+    let resolvedValue = !!this.resolver(value);
 
-      Logger.log(`Resolved: ${value} to: ${resolvedValue}`);
+    Logger.log(`Resolved: ${value} to: ${resolvedValue}`);
 
-      return resolvedValue;
-    } else {
-      throw `No resolver function but trying to resolve: ${value}`;
-    }
+    return resolvedValue;
   }
 }
