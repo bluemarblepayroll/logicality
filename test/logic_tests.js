@@ -24,7 +24,7 @@ const testEvaluate = (tests) => {
   });
 };
 
-describe('Logic#evaluation', () => {
+describe('Logic#evaluate', () => {
 
   it('should evaluate boolean-only expressions', () => {
     let tests = [

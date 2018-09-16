@@ -27,11 +27,15 @@ export class Parser {
     }
   }
 
-  error():void {
+  parse():AstNode {
+    return this.expr();
+  }
+
+  private error():void {
     throw 'Invalid parser syntax';
   }
 
-  eat(type:TokenType):void {
+  private eat(type:TokenType):void {
     if (this.currentToken.type === type) {
       this.currentToken = this.lexer.getNextToken();
     } else {
@@ -39,7 +43,7 @@ export class Parser {
     }
   }
 
-  factor():AstNode {
+  private factor():AstNode {
     //factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
     let token:Token = this.currentToken;
@@ -61,7 +65,7 @@ export class Parser {
     }
   }
 
-  expr():AstNode {
+  private expr():AstNode {
     //expr   : factor ((&& | ||) factor)*
     //factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
@@ -84,7 +88,4 @@ export class Parser {
     return node;
   }
 
-  parse():AstNode {
-    return this.expr();
-  }
 }

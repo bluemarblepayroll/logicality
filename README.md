@@ -97,6 +97,12 @@ To compile the TypeScript source down to native JavaScript, run:
 npm run build
 ````
 
+or:
+
+````
+yarn run build
+````
+
 You can also run the TypeScript compiler in watch mode with (start developing):
 
 ```
@@ -109,6 +115,12 @@ To execute the test suite first compile the solution then run:
 
 ````
 npm run test
+````
+
+or:
+
+````
+yarn run test
 ````
 
 ## License
