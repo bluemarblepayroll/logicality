@@ -14,38 +14,37 @@ import { NodeVisitor } from "./interpreter/node_visitor";
 export namespace Logic {
 
   export interface ResolverFunction {
-    (value:string, input:any):boolean;
+    (value: tring, input: any): boolean;
   }
 
-  const objectResolver:ResolverFunction = (value:string, input:any):boolean => input && !!input[value];
+  const objectResolver:ResolverFunction = (value: string, input: any): boolean => input && !!input[value];
 
   const cache:Record<string,AstNode> = {};
 
-  function resolverWrapper(input:any, resolver:Function):InterpreterResolverFunction {
+  function resolverWrapper(input: any, resolver: Function): InterpreterResolverFunction {
     if (resolver) {
-      return (expr:string) => resolver(expr, input);
+      return (expr: string) => resolver(expr, input);
     }
 
     return (expr:string) => objectResolver(expr, input);
   }
 
-  function get(expression:string):AstNode {
+  function get(expression: string): AstNode {
     if (cache[expression]) {
       return cache[expression];
     }
 
-    let lexer:ILexer = new SimpleLexer(expression);
-    let parser:Parser = new Parser(lexer);
+    let lexer: ILexer = new SimpleLexer(expression);
+    let parser: Parser = new Parser(lexer);
 
     return cache[expression] = parser.parse();
   }
 
-  export function evaluate(expression:string, input:any, resolver?:ResolverFunction):boolean {
+  export function evaluate(expression: string, input: any, resolver?: ResolverFunction): boolean {
     let rootNode: AstNode = get(expression);
     let wrapper: InterpreterResolverFunction = resolverWrapper(input, resolver);
     let interpreter: NodeVisitor = new Interpreter(wrapper);
 
     return interpreter.visit(rootNode);
   }
-
 }
