@@ -5,20 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export interface Grammar {
-  value: RegExp;
+export interface IGrammar {
   andOp: RegExp;
-  orOp: RegExp;
-  notOp: RegExp;
   leftParen: RegExp;
+  notOp: RegExp;
+  orOp: RegExp;
   rightParen: RegExp;
+  value: RegExp;
 }
 
-export const simpleGrammar:Grammar = {
-  value: /[a-zA-Z0-9_$@?\.]+/, //Operand
-  andOp: /&&/, //Operator
-  orOp: /\|\|/, //Operator
-  notOp: /\!/, //Operator
+export const simpleGrammar: IGrammar = {
+  andOp: /&&/, // Operator
   leftParen: /\(/,
-  rightParen: /\)/
-}
+  notOp: /\!/, // Operator
+  orOp: /\|\|/, // Operator
+  rightParen: /\)/,
+  value: /[a-zA-Z0-9_$@?\.]+/, // Operand
+};

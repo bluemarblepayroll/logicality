@@ -6,24 +6,24 @@
  */
 
 export enum TokenType {
-  Value = 'VALUE',
-  AndOp = 'AND_OP',
-  OrOp = 'OR_OP',
-  NotOp = 'NOT_OP',
-  LeftParen = 'LEFT_PAREN',
-  RightParen = 'RIGHT_PAREN',
+  AndOp = "AND_OP",
+  LeftParen = "LEFT_PAREN",
+  NotOp = "NOT_OP",
+  OrOp = "OR_OP",
+  RightParen = "RIGHT_PAREN",
+  Value = "VALUE",
 }
 
 export class Token {
-  readonly type:TokenType;
-  readonly value:string;
+  public readonly type: TokenType;
+  public readonly value: string;
 
-  constructor(type:TokenType, value:string) {
+  constructor(type: TokenType, value: string) {
     this.type = type;
     this.value = value;
   }
 
-  toString() {
+  public toString(): string {
     return `${this.type}::${this.value}`;
   }
 }
