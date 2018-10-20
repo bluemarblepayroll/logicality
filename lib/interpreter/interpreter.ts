@@ -10,10 +10,12 @@ import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from
 import { Logger } from "../util/logger";
 import { NodeVisitor } from "./node_visitor";
 
-export class Interpreter extends NodeVisitor {
-  private readonly resolver: () => void;
+export type ResolverFunction = (value: string) => boolean;
 
-  constructor(resolver: () => void) {
+export class Interpreter extends NodeVisitor {
+  private readonly resolver: ResolverFunction;
+
+  constructor(resolver: ResolverFunction) {
     super();
 
     if (!resolver) {
