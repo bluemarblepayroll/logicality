@@ -6,7 +6,10 @@
  */
 
 import { TokenType } from "../lexer/token";
-import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from "../parser/ast";
+import { AstNode } from "../parser/ast/ast_node";
+import { BinaryOperatorNode } from "../parser/ast/binary_operator_node";
+import { UnaryOperatorNode } from "../parser/ast/unary_operator_node";
+import { ValueOperandNode } from "../parser/ast/value_operand_node";
 import { Logger } from "../util/logger";
 import { NodeVisitor } from "./node_visitor";
 

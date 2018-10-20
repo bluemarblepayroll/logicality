@@ -5,37 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Lexer } from "../lexer/lexer";
+import { ILexer } from "../lexer/lexer";
 import { Token, TokenType } from "../lexer/token";
-import { AstNode, BinaryOperatorNode, UnaryOperatorNode, ValueOperandNode } from './ast';
+import { AstNode } from "./ast/ast_node";
+import { BinaryOperatorNode } from "./ast/binary_operator_node";
+import { UnaryOperatorNode } from "./ast/unary_operator_node";
+import { ValueOperandNode } from "./ast/value_operand_node";
 
 export class Parser {
-  readonly lexer:Lexer;
+  private readonly lexer: ILexer;
+  private currentToken: Token;
 
-  private currentToken:Token;
-
-  constructor(lexer:Lexer) {
+  constructor(lexer: ILexer) {
     if (!lexer) {
-      throw 'Lexer is required';
+      throw new Error("Lexer is required");
     }
 
     this.lexer = lexer;
     this.currentToken = this.lexer.getNextToken();
 
     if (!this.currentToken) {
-      throw 'Lexer must contain at least one token';
+      throw new Error("Lexer must contain at least one token");
     }
   }
 
-  parse():AstNode {
+  public parse(): AstNode {
     return this.expr();
   }
 
-  private error():void {
-    throw 'Invalid parser syntax';
+  private error(): void {
+    throw new Error("Invalid parser syntax");
   }
 
-  private eat(type:TokenType):void {
+  private eat(type: TokenType): void {
     if (this.currentToken.type === type) {
       this.currentToken = this.lexer.getNextToken();
     } else {
@@ -43,38 +45,38 @@ export class Parser {
     }
   }
 
-  private factor():AstNode {
-    //factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
+  private factor(): AstNode {
+    // factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
-    let token:Token = this.currentToken;
+    const token: Token = this.currentToken;
 
     if (token.type === TokenType.Value) {
       this.eat(TokenType.Value);
       return new ValueOperandNode(token);
     } else if (token.type === TokenType.LeftParen) {
       this.eat(TokenType.LeftParen);
-      let node:AstNode = this.expr();
+      const node: AstNode = this.expr();
       this.eat(TokenType.RightParen);
       return node;
     } else if (token.type === TokenType.NotOp) {
       this.eat(TokenType.NotOp);
-      let node:AstNode = this.factor();
+      const node: AstNode = this.factor();
       return new UnaryOperatorNode(node, token);
     } else {
-      throw `Factor cannot determine what to do with: ${token}`;
+      throw new Error(`Factor cannot determine what to do with: ${token}`);
     }
   }
 
-  private expr():AstNode {
-    //expr   : factor ((&& | ||) factor)*
-    //factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
+  private expr(): AstNode {
+    // expr   : factor ((&& | ||) factor)*
+    // factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
-    let node:AstNode = this.factor();
+    let node: AstNode = this.factor();
 
-    while(this.currentToken &&
+    while (this.currentToken &&
       (this.currentToken.type === TokenType.AndOp ||
        this.currentToken.type === TokenType.OrOp)) {
-      let token:Token = this.currentToken;
+      const token: Token = this.currentToken;
 
       if (token.type === TokenType.AndOp) {
         this.eat(TokenType.AndOp);
@@ -87,5 +89,4 @@ export class Parser {
 
     return node;
   }
-
 }

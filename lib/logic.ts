@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Lexer, SimpleLexer } from "./lexer/lexer";
-import { AstNode } from "./parser/ast";
+import { ILexer, SimpleLexer } from "./lexer/lexer";
+import { AstNode } from "./parser/ast/ast_node";
 import { Parser } from "./parser/parser";
-import { NodeVisitor, Interpreter } from "./interpreter/interpreter";
+import { Interpreter, ResolverFunction as InterpreterResolverFunction } from "./interpreter/interpreter";
+import { NodeVisitor } from "./interpreter/node_visitor";
 
 export namespace Logic {
 
@@ -20,7 +21,7 @@ export namespace Logic {
 
   const cache:Record<string,AstNode> = {};
 
-  function resolverWrapper(input:any, resolver:Function):Function {
+  function resolverWrapper(input:any, resolver:Function):InterpreterResolverFunction {
     if (resolver) {
       return (expr:string) => resolver(expr, input);
     }
@@ -33,16 +34,16 @@ export namespace Logic {
       return cache[expression];
     }
 
-    let lexer:Lexer = new SimpleLexer(expression);
+    let lexer:ILexer = new SimpleLexer(expression);
     let parser:Parser = new Parser(lexer);
 
     return cache[expression] = parser.parse();
   }
 
   export function evaluate(expression:string, input:any, resolver?:ResolverFunction):boolean {
-    let rootNode:AstNode = get(expression);
-    let wrapper:Function = resolverWrapper(input, resolver);
-    let interpreter:NodeVisitor = new Interpreter(wrapper);
+    let rootNode: AstNode = get(expression);
+    let wrapper: InterpreterResolverFunction = resolverWrapper(input, resolver);
+    let interpreter: NodeVisitor = new Interpreter(wrapper);
 
     return interpreter.visit(rootNode);
   }

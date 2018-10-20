@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AstNode } from "../parser/ast";
+import { AstNode } from "../parser/ast/ast_node";
 import { Logger } from "../util/logger";
 
 export class NodeVisitor {
