@@ -18,15 +18,3 @@ export class UnaryOperatorNode extends AstNode {
     this.child = child;
   }
 }
-
-export class ValueOperandNode extends AstNode {
-  public readonly value: string;
-  public readonly name: string;
-
-  constructor(token) {
-    super(token);
-
-    this.name = "ValueOperandNode";
-    this.value = token.value;
-  }
-}

@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// tslint:disable-next-line:no-namespace
 export namespace Logger {
   let turnedOn = false;
 
@@ -17,7 +18,9 @@ export namespace Logger {
   }
 
   export function log(msg) {
+    // tslint:disable-next-line:no-console
     if (turnedOn && console && console.log) {
+      // tslint:disable-next-line:no-console
       console.log(`[LOG] ${msg}`);
     }
   }
