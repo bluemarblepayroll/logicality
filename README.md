@@ -123,6 +123,20 @@ or:
 yarn run test
 ````
 
+### Linting
+
+To execute the TypeScript linter:
+
+````
+npm run lint
+````
+
+or:
+
+````
+yarn run lint
+````
+
 ## License
 
 This project is MIT Licensed.

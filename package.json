@@ -28,7 +28,8 @@
   "scripts": {
     "test": "mocha --reporter spec",
     "build": "tsc",
-    "start": "tsc -w"
+    "start": "tsc -w",
+    "lint": "tslint -c tslint.json 'lib/**/*.ts'"
   },
   "repository": {
     "type": "git",
