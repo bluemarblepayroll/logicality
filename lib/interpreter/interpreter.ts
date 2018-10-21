@@ -10,7 +10,7 @@ import { AstNode } from "../parser/ast/ast_node";
 import { BinaryOperatorNode } from "../parser/ast/binary_operator_node";
 import { UnaryOperatorNode } from "../parser/ast/unary_operator_node";
 import { ValueOperandNode } from "../parser/ast/value_operand_node";
-import { Logger } from "../util/logger";
+import { log } from "../util/logger";
 import { NodeVisitor } from "./node_visitor";
 
 export type ResolverFunction = (value: string) => boolean;
@@ -63,7 +63,7 @@ export class Interpreter extends NodeVisitor {
   private resolveValue(value: string) {
     const resolvedValue = !!this.resolver(value);
 
-    Logger.log(`Resolved: ${value} to: ${resolvedValue}`);
+    log(`Resolved: ${value} to: ${resolvedValue}`);
 
     return resolvedValue;
   }

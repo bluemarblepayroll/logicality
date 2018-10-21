@@ -9,10 +9,10 @@
 
 const expect = require('chai').expect;
 const Logic = require('../dist/logic.js').Logic;
-const Logger = require('../dist/util/logger.js').Logger;
+const Logger = require('../dist/util/logger.js');
 
-//Uncomment this line if you want to output log data.
-//Logger.on();
+// Uncomment this line if you want to output log data.
+// Logger.on();
 
 const testEvaluate = (tests) => {
   tests.forEach((testData) => {

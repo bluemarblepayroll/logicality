@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Logger } from "../util/logger";
+import { log } from "../util/logger";
 import { IGrammar, simpleGrammar } from "./grammar";
 import { Token, TokenType } from "./token";
 
@@ -37,7 +37,7 @@ export class SimpleLexer implements ILexer {
     this.matches = this.getMatches();
     this.currentIndex = -1;
 
-    Logger.log(`[SimpleLexer::constructor] ${this.expression} -> ${this.matches.join(", ")}`);
+    log(`[SimpleLexer::constructor] ${this.expression} -> ${this.matches.join(", ")}`);
   }
 
   public getNextToken(): Token {
@@ -49,7 +49,7 @@ export class SimpleLexer implements ILexer {
 
     const token = this.matches[this.currentIndex];
 
-    Logger.log(`getNextToken: ${token}`);
+    log(`getNextToken: ${token}`);
 
     return token;
   }

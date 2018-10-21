@@ -6,7 +6,7 @@
  */
 
 import { AstNode } from "../parser/ast/ast_node";
-import { Logger } from "../util/logger";
+import { log } from "../util/logger";
 
 export class NodeVisitor {
 
@@ -17,7 +17,7 @@ export class NodeVisitor {
 
     const visitorName: string = this.getMethodName(node);
 
-    Logger.log(`Visiting: ${node} with method: ${visitorName}`);
+    log(`Visiting: ${node} with method: ${visitorName}`);
 
     if (this[visitorName]) {
       return this[visitorName](node);
