@@ -50,8 +50,12 @@ visible || admin
 Now you can bind and evaluate this expression against passed in objects:
 
 ````
+import { evaluate } from '@bluemarblepayroll/logicality';
+
 let record = { visible: false, admin: true };
-let visible =  Logic.evaluate('visible || admin', record); // resolves to true.
+let expression = 'visible || admin';
+
+let visible =  evaluate(expression, record); // resolves to true.
 ````
 
 ### What is truthy and falsy?
@@ -72,9 +76,12 @@ Everything evaluates to true.
 The above example works just fine using Logic's default object value resolver, but you can also pass in a custom function that will serve as resolver.  That way you could use dot notation for value resolution.  For example:
 
 ````
-let resolver = (value, input) => input && value && !!input.get(value.toString().split('.'));
 let record = Immutable.fromJS({ visible: false, settings: { admin: true } });
-let visible =  Logic.evaluate('visible || settings.admin', record, resolver); // resolves to true.
+let expression = 'visible || settings.admin';
+
+let resolver = (value, input) => input && value && !!input.get(value.toString().split('.'));
+
+let visible =  evaluate(expression, record, resolver); // resolves to true.
 ````
 
 ## Contributing
@@ -94,19 +101,13 @@ Basic steps to take to get this repository compiling:
 To compile the TypeScript source down to native JavaScript, run:
 
 ````
-npm run build
-````
-
-or:
-
-````
 yarn run build
 ````
 
 You can also run the TypeScript compiler in watch mode with (start developing):
 
 ```
-npm start
+yarn run start
 ```
 
 ### Running Tests
@@ -114,24 +115,10 @@ npm start
 To execute the test suite first compile the solution then run:
 
 ````
-npm run test
-````
-
-or:
-
-````
 yarn run test
 ````
 
 ### Linting
-
-To execute the TypeScript linter:
-
-````
-npm run lint
-````
-
-or:
 
 ````
 yarn run lint
