@@ -3,10 +3,10 @@ node_js:
 - node
 - '8'
 before_script:
-- yarn
 - yarn run build
 script:
 - yarn run lint
+- yarn run test
 notifications:
   hipchat:
     rooms:
