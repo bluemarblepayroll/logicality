@@ -13,7 +13,7 @@ import { Parser } from "./parser/parser";
 
 export type IResolverFunction = (value: string, input: any) => boolean;
 
-const objectResolver: IResolverFunction = (value: string, input: any): boolean => input && !!input[value];
+const objectResolver:IResolverFunction = (value: string, input: any): boolean => input && !!input[value];
 
 const cache: Record<string, AstNode> = {};
 
