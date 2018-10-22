@@ -1,9 +1,13 @@
 language: node_js
 node_js:
-  - "node"
-  - "8"
+- node
+- '8'
 before_script:
-  - yarn
-  - yarn run build
+- yarn
+- yarn run build
 script:
-  - yarn run lint
+- yarn run lint
+notifications:
+  hipchat:
+    rooms:
+      secure: i4a0tjrYg12d9YdUnxjTbpzFKmGY5wWTh6a++fzNq+5eBXgoXjLZe6i21eZHbwybba7uT2i+we/oelpTTzY8R15FW5O3ObbthPcaEOsj0r1pR3y7+PMsA/jJ8+yUei3PDQsanky8iJ4zpa0h9gxgZHa+yG+2//+yOLID1hAmfQvYru/0I/pnHX5gGVFMilrfTEFLU36+FQ8aqWo+CcWGScbKs8sJlYdAWr4T6Q6fKaoTvrg2mcZ8h2On9pXNy47LgNUiSeAVIYLH1QZ2f1WB3uF0sumCitGqd+aAd4V49j87DMmnAslUUvo99Rk2r5fzZ+EECCwSjWd4+Wf9f3EFx0rXreZ0UcEyfBo2o9lQhgbgYN46rbW0AqMcrsxel0eYnVWWo42A0H6SclnXJ6QzwrOgXiMOLHKiSCaw+8cmCMnsuLCU30je29N7NS7uOZpokZ/29yetToG2Ipinuz4rTRTLb6ogZE1jvFIKjD+zDLMoXi1+RpZxdT6K5H5QyQoypzp85OJ6emwuFDqNEXU01yrLzvjqoeoAoDjgNT0wblb+HKtjJqns56m1h+JGx5VcdcAE6lrnVQ9rd3efhtEWL2KhUvzEZgWR8cesqZIYRonRMIowHx7ue1Sz61gofy4laDkihgEwHaGzbR34BNGhBPIflKfSLaST4QI+rLOndSM=
