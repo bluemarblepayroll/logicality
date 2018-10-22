@@ -7,6 +7,7 @@ before_script:
 script:
 - yarn run lint
 - yarn run test
+cache: yarn
 notifications:
   hipchat:
     rooms:
