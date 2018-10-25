@@ -7,7 +7,7 @@
 
 import { Token } from "../../lexer/token";
 
-export class AstNode {
+export class Node {
   public readonly token: Token;
   public readonly name: string;
 
@@ -17,6 +17,6 @@ export class AstNode {
   }
 
   public toString(): string {
-    return `AstNode: ${this.token}::${this.name}`;
+    return `Node: ${this.token}::${this.name}`;
   }
 }

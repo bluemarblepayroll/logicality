@@ -6,17 +6,17 @@
  */
 
 import { Token } from "../../lexer/token";
-import { AstNode } from "./ast_node";
+import { Node } from "./node";
 
-export class BinaryOperatorNode extends AstNode {
-  public readonly left: AstNode;
-  public readonly right: AstNode;
+export class BinaryOperator extends Node {
+  public readonly left: Node;
+  public readonly right: Node;
   public readonly name: string;
 
-  constructor(left: AstNode, token: Token, right: AstNode) {
+  constructor(left: Node, token: Token, right: Node) {
     super(token);
 
-    this.name = "BinaryOperatorNode";
+    this.name = "BinaryOperator";
     this.left = left;
     this.right = right;
   }

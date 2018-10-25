@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AstNode } from "./ast_node";
+import { Node } from "./node";
 
-export class UnaryOperatorNode extends AstNode {
-  public readonly child: AstNode;
+export class UnaryOperator extends Node {
+  public readonly child: Node;
   public readonly name: string;
 
   constructor(child, token) {
     super(token);
 
-    this.name = "UnaryOperatorNode";
+    this.name = "UnaryOperator";
     this.child = child;
   }
 }

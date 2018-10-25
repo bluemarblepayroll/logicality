@@ -8,14 +8,14 @@
 import { Interpreter, ResolverFunction as InterpreterResolverFunction } from "./interpreter/interpreter";
 import { NodeVisitor } from "./interpreter/node_visitor";
 import { ILexer, SimpleLexer } from "./lexer/lexer";
-import { AstNode } from "./parser/ast/ast_node";
+import { Node } from "./parser/ast/node";
 import { Parser } from "./parser/parser";
 
 export type IResolverFunction = (value: string, input: any) => boolean;
 
 const objectResolver: IResolverFunction = (value: string, input: any): boolean => input && !!input[value];
 
-const cache: Record<string, AstNode> = {};
+const cache: Record<string, Node> = {};
 
 function resolverWrapper(input: any, resolver: IResolverFunction): InterpreterResolverFunction {
   if (resolver) {
@@ -25,7 +25,7 @@ function resolverWrapper(input: any, resolver: IResolverFunction): InterpreterRe
   return (expr: string) => objectResolver(expr, input);
 }
 
-function get(expression: string): AstNode {
+function get(expression: string): Node {
   if (cache[expression]) {
     return cache[expression];
   }
@@ -37,7 +37,7 @@ function get(expression: string): AstNode {
 }
 
 export function evaluate(expression: string, input: any, resolver?: IResolverFunction): boolean {
-  const rootNode: AstNode = get(expression);
+  const rootNode: Node = get(expression);
   const wrapper: InterpreterResolverFunction = resolverWrapper(input, resolver);
   const interpreter: NodeVisitor = new Interpreter(wrapper);
 

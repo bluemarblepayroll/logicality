@@ -7,10 +7,10 @@
 
 import { ILexer } from "../lexer/lexer";
 import { Token, TokenType } from "../lexer/token";
-import { AstNode } from "./ast/ast_node";
-import { BinaryOperatorNode } from "./ast/binary_operator_node";
-import { UnaryOperatorNode } from "./ast/unary_operator_node";
-import { ValueOperandNode } from "./ast/value_operand_node";
+import { BinaryOperator } from "./ast/binary_operator";
+import { Node } from "./ast/node";
+import { UnaryOperator } from "./ast/unary_operator";
+import { ValueOperand } from "./ast/value_operand";
 
 export class Parser {
   private readonly lexer: ILexer;
@@ -29,7 +29,7 @@ export class Parser {
     }
   }
 
-  public parse(): AstNode {
+  public parse(): Node {
     return this.expr();
   }
 
@@ -45,33 +45,33 @@ export class Parser {
     }
   }
 
-  private factor(): AstNode {
+  private factor(): Node {
     // factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
     const token: Token = this.currentToken;
 
     if (token.type === TokenType.Value) {
       this.eat(TokenType.Value);
-      return new ValueOperandNode(token);
+      return new ValueOperand(token);
     } else if (token.type === TokenType.LeftParen) {
       this.eat(TokenType.LeftParen);
-      const node: AstNode = this.expr();
+      const node: Node = this.expr();
       this.eat(TokenType.RightParen);
       return node;
     } else if (token.type === TokenType.NotOp) {
       this.eat(TokenType.NotOp);
-      const node: AstNode = this.factor();
-      return new UnaryOperatorNode(node, token);
+      const node: Node = this.factor();
+      return new UnaryOperator(node, token);
     } else {
       throw new Error(`Factor cannot determine what to do with: ${token}`);
     }
   }
 
-  private expr(): AstNode {
+  private expr(): Node {
     // expr   : factor ((&& | ||) factor)*
     // factor : VALUE | LEFT_PAREN expr RIGHT_PAREN | NOT_OP expr
 
-    let node: AstNode = this.factor();
+    let node: Node = this.factor();
 
     while (this.currentToken &&
       (this.currentToken.type === TokenType.AndOp ||
@@ -84,7 +84,7 @@ export class Parser {
         this.eat(TokenType.OrOp);
       }
 
-      node = new BinaryOperatorNode(node, token, this.factor());
+      node = new BinaryOperator(node, token, this.factor());
     }
 
     return node;

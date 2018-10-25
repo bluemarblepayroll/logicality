@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AstNode } from "../parser/ast/ast_node";
+import { Node } from "../parser/ast/node";
 import { log } from "../util/logger";
 
 export class NodeVisitor {
 
-  public visit(node: AstNode): boolean {
+  public visit(node: Node): boolean {
     if (!node) {
       return null;
     }
@@ -26,11 +26,11 @@ export class NodeVisitor {
     }
   }
 
-  private genericVisit(node: AstNode): boolean {
+  private genericVisit(node: Node): boolean {
     throw new Error(`No visitor method: ${this.getMethodName(node)}`);
   }
 
-  private getMethodName(node: AstNode): string {
+  private getMethodName(node: Node): string {
     return `visit${node.name}`;
   }
 }

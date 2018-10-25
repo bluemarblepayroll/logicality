@@ -6,10 +6,10 @@
  */
 
 import { TokenType } from "../lexer/token";
-import { AstNode } from "../parser/ast/ast_node";
-import { BinaryOperatorNode } from "../parser/ast/binary_operator_node";
-import { UnaryOperatorNode } from "../parser/ast/unary_operator_node";
-import { ValueOperandNode } from "../parser/ast/value_operand_node";
+import { BinaryOperator } from "../parser/ast/binary_operator";
+import { Node } from "../parser/ast/node";
+import { UnaryOperator } from "../parser/ast/unary_operator";
+import { ValueOperand } from "../parser/ast/value_operand";
 import { log } from "../util/logger";
 import { NodeVisitor } from "./node_visitor";
 
@@ -28,11 +28,11 @@ export class Interpreter extends NodeVisitor {
     this.resolver = resolver;
   }
 
-  private error(node: AstNode): boolean {
+  private error(node: Node): boolean {
     throw new Error(`Visitor cant process node token type: ${node.token.type}`);
   }
 
-  private visitBinaryOperatorNode(node: BinaryOperatorNode): boolean {
+  private visitBinaryOperator(node: BinaryOperator): boolean {
     if (node.token.type === TokenType.AndOp) {
       return this.visit(node.left) && this.visit(node.right);
     } else if (node.token.type === TokenType.OrOp) {
@@ -42,7 +42,7 @@ export class Interpreter extends NodeVisitor {
     }
   }
 
-  private visitUnaryOperatorNode(node: UnaryOperatorNode): boolean {
+  private visitUnaryOperator(node: UnaryOperator): boolean {
     if (node.token.type === TokenType.NotOp) {
       return !this.visit(node.child);
     } else {
@@ -50,7 +50,7 @@ export class Interpreter extends NodeVisitor {
     }
   }
 
-  private visitValueOperandNode(node: ValueOperandNode): boolean {
+  private visitValueOperand(node: ValueOperand): boolean {
     if (node.value === "true") {
       return true;
     } else if (node.value === "false" || node.value === "null") {

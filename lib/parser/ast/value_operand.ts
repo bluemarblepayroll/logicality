@@ -5,16 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { AstNode } from "./ast_node";
+import { Node } from "./node";
 
-export class ValueOperandNode extends AstNode {
+export class ValueOperand extends Node {
   public readonly value: string;
   public readonly name: string;
 
   constructor(token) {
     super(token);
 
-    this.name = "ValueOperandNode";
+    this.name = "ValueOperand";
     this.value = token.value;
   }
 }
