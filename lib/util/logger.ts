@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+// TODO: make sure to plug in or implement a real logger.
+
 let turnedOn = false;
 
 export function on() {
