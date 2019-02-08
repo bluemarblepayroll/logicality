@@ -1,6 +1,6 @@
 # Logicality
 
-[![Build Status](https://travis-ci.org/bluemarblepayroll/logicality.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/logicality)
+[![npm version](https://badge.fury.io/js/%40bluemarblepayroll%2Flogicality.svg)](https://badge.fury.io/js/%40bluemarblepayroll%2Flogicality) [![Build Status](https://travis-ci.org/bluemarblepayroll/logicality.svg?branch=master)](https://travis-ci.org/bluemarblepayroll/logicality) [![Maintainability](https://api.codeclimate.com/v1/badges/fbb0d5a6bac07afc7c2f/maintainability)](https://codeclimate.com/github/bluemarblepayroll/logicality/maintainability) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A common problem that many frameworks have is the ability to give developers an expressive
 intermediary scripting language or DSL. Logicality helps solve this problem by providing a simple
